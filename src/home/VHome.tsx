@@ -19,7 +19,6 @@ export class VHome extends VPage<CHome> {
 	content() {
 		return <div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
 				<p>
 					<span className="text-success">tonwa</span> + <span className="text-primary">uq</span> = UI + DB
 				</p>
@@ -29,6 +28,19 @@ export class VHome extends VPage<CHome> {
 					开心
 				</div>
 			</header>
+			<div className="border px-3 py-3 bg-white d-flex align-items-start">
+				<button className="btn btn-primary me-3"
+					onClick={this.controller.showUqTest}>测试UQ操作</button>
+			</div>
+			<div className="border px-3 py-3 bg-white d-flex align-items-start">
+				<button className="btn btn-primary me-3"
+					onClick={this.controller.showTestPage1}>测试页1</button>
+				<button className="btn btn-success me-3"
+					onClick={this.controller.showTestPage2}>测试页2</button>
+				<button className="btn btn-danger me-3"
+					onClick={this.controller.showTestPage3}>测试页3</button>
+			</div>
+			<img src={logo} className="App-logo" alt="logo" />
 			<ul className="text-left my-3 mr-3">
 				{this.items.map((v, index) => <li key={index} className="my-2">{v}</li>)}
 			</ul>

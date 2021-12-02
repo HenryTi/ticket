@@ -1,7 +1,7 @@
-//=== UqApp builder created on Tue Nov 30 2021 20:57:08 GMT-0500 (北美东部标准时间) ===//
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
-		import { Render } from "tonwa-react";
+//=== UqApp builder created on Thu Dec 02 2021 16:23:56 GMT-0500 (北美东部标准时间) ===//
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
+import { Render } from "tonwa-react";
 
 
 //===============================
@@ -67,8 +67,8 @@ export interface OrderMaster {
 export interface Customer {
 	id?: number;
 	no?: string;
-	firstName: string;
-	lastName: string;
+	name: string;
+	vice: string;
 }
 
 export interface Staff {
@@ -102,12 +102,13 @@ export interface ParamActs {
 	orderDetail?: OrderDetail[];
 }
 
-	
+
 export interface UqExt extends Uq {
-		Acts(param:ParamActs): Promise<any>;
-	
-	$user: UqTuid<Tuid$user>&{tv:(id:number, render?:Render<any>)=>JSX.Element};
-	$sheet: UqTuid<Tuid$sheet>&{tv:(id:number, render?:Render<any>)=>JSX.Element};
+	Acts(param: ParamActs): Promise<any>;
+	SQL: Uq;
+
+	$user: UqTuid<Tuid$user> & { tv: (id: number, render?: Render<any>) => JSX.Element };
+	$sheet: UqTuid<Tuid$sheet> & { tv: (id: number, render?: Render<any>) => JSX.Element };
 	$setMyTimezone: UqAction<Param$setMyTimezone, Result$setMyTimezone>;
 	$poked: UqQuery<Param$poked, Result$poked>;
 	$getMyTimezone: UqQuery<Param$getMyTimezone, Result$getMyTimezone>;
@@ -118,11 +119,10 @@ export interface UqExt extends Uq {
 	OrderDetail: UqID<any>;
 }
 
-	export function assign(uq: any, to:string, from:any): void {
-		let hasEntity = uq.hasEntity(to);
-		if (hasEntity === false) {
-			return;
-		}
-		Object.assign((uq as any)[to], from);
+export function assign(uq: any, to: string, from: any): void {
+	let hasEntity = uq.hasEntity(to);
+	if (hasEntity === false) {
+		return;
 	}
-	
+	Object.assign((uq as any)[to], from);
+}
