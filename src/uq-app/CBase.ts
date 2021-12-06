@@ -1,17 +1,17 @@
-//=== UqApp builder created on Thu Dec 02 2021 16:23:56 GMT-0500 (北美东部标准时间) ===//
+//=== UqApp builder created on Thu Dec 02 2021 23:05:16 GMT-0500 (北美东部标准时间) ===//
 import { CSub, CBase, CAppBase, IConstructor } from 'tonwa-react';
 import { UQs } from './uqs';
 import { CApp } from './CApp';
 
 export abstract class CUqBase extends CBase<CApp, UQs> {
-    protected async internalStart(param?: any, ...params: any[]): Promise<void> { }
+    protected async internalStart(param?:any, ...params:any[]):Promise<void> {}
 }
 
-export abstract class CUqSub<A extends CAppBase<U>, U, T extends CBase<A, U>> extends CSub<A, U, T> {
+export abstract class CUqSub<A extends CAppBase<U>, U, T extends CBase<A,U>> extends CSub<A, U, T> {
 }
 
 export abstract class CUqApp extends CAppBase<UQs> {
-    protected newC<T extends CUqBase>(type: IConstructor<T>, ...param: any[]): T {
+    protected newC<T extends CUqBase>(type: IConstructor<T>, ...param:any[]): T {
         let c = new type(this);
         c.internalInit(...param);
         return c;

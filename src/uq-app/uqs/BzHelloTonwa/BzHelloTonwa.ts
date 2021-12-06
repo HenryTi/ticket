@@ -1,4 +1,4 @@
-//=== UqApp builder created on Thu Dec 02 2021 16:23:56 GMT-0500 (北美东部标准时间) ===//
+//=== UqApp builder created on Thu Dec 02 2021 23:05:16 GMT-0500 (北美东部标准时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
 import { Render } from "tonwa-react";
@@ -102,10 +102,13 @@ export interface ParamActs {
 	orderDetail?: OrderDetail[];
 }
 
-
+export interface IDReact {
+	ui: any;
+}
 export interface UqExt extends Uq {
 	Acts(param: ParamActs): Promise<any>;
 	SQL: Uq;
+	IDRender(id: number): JSX.Element;
 
 	$user: UqTuid<Tuid$user> & { tv: (id: number, render?: Render<any>) => JSX.Element };
 	$sheet: UqTuid<Tuid$sheet> & { tv: (id: number, render?: Render<any>) => JSX.Element };
@@ -113,7 +116,7 @@ export interface UqExt extends Uq {
 	$poked: UqQuery<Param$poked, Result$poked>;
 	$getMyTimezone: UqQuery<Param$getMyTimezone, Result$getMyTimezone>;
 	OrderMaster: UqID<any>;
-	Customer: UqID<any>;
+	Customer: UqID<any> & IDReact;
 	Staff: UqID<any>;
 	Tag: UqID<any>;
 	OrderDetail: UqID<any>;
