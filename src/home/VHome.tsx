@@ -4,6 +4,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import { CCustomer } from "ids/customer";
 import { CApp, CUqBase } from "uq-app";
+import { CProduct } from "ids/product";
 
 interface Row {
 	caption: string;
@@ -16,8 +17,8 @@ export class VHome extends VPage<CHome> {
 			controller: CCustomer,
 		},
 		{
-			caption: '客户管理',
-			controller: CCustomer,
+			caption: '产品管理',
+			controller: CProduct,
 		},
 	];
 
