@@ -14,4 +14,3 @@ ID Product GLOBAL (
     KEY version CHAR(50),
     discription TEXT,
 );
-

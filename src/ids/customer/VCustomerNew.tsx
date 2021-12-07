@@ -21,6 +21,11 @@ export class VCustomerNew extends VPage<CCustomer> {
                     placeholder: '请输入唯一编号',
                     defaultValue: this.controller.newNo
                 } as UiTextItem,
+                name: {
+                    ...ui.fields['name'],
+                    widget: 'text',
+                    label: '名称',
+                } as UiTextItem,
                 submit: {
                     name: 'submit',
                     widget: 'button',

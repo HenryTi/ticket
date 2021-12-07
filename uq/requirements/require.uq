@@ -12,7 +12,21 @@ ID RequireSheet (
     creator ID Staff,
     sys (create, update),
 );
-
+/*
+ACT SaveRequireSheet(
+    #RequireSheet,
+    ARR detail (
+        #Require,
+    )
+) {
+    VAR id ID = ID(RequireSheet new);
+    WITH RequireSheet as a ID=id SET a.no=NO(), a.customer=customer, a.creator=creator;
+    FOR detail {
+        VAR requireId ID = ID(Require new);
+        WITH Require as a ID=requireId SET a.main=id, a.product=product, a.discription=discription;
+    }
+};
+*/
 ENUM EnumRequireSheetFlow (init=0, approving=1, approved=2, done=100, cancelled=101);
 IX RequireSheetFlow (
     ix ENUM EnumRequireSheetFlow,
