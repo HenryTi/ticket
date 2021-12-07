@@ -1,6 +1,0 @@
-IDX Achieve ver 0.1 
-(
-	id,							-- Staff
-	saleAmount DEC(12,2),	-- 销售额
-	deliver DEC(12,2),		-- 发货额
-);

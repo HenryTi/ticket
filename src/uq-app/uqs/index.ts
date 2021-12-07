@@ -1,12 +1,12 @@
-//=== UqApp builder created on Thu Dec 02 2021 23:05:16 GMT-0500 (北美东部标准时间) ===//
-import * as BzHelloTonwa from './BzHelloTonwa';
+//=== UqApp builder created on Mon Dec 06 2021 19:08:27 GMT-0500 (北美东部标准时间) ===//
+import * as BzRequirements from './BzRequirements';
 
 export interface UQs {
-	BzHelloTonwa: BzHelloTonwa.UqExt;
+	BzRequirements: BzRequirements.UqExt;
 }
 
-export * as BzHelloTonwa from './BzHelloTonwa';
+export * as BzRequirements from './BzRequirements';
 
 export function setUI(uqs:UQs) {
-	BzHelloTonwa.setUI(uqs.BzHelloTonwa);
+	BzRequirements.setUI(uqs.BzRequirements);
 }

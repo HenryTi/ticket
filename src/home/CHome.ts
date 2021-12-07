@@ -1,3 +1,4 @@
+import { Controller } from "tonwa";
 import { CApp, CUqBase } from "uq-app";
 import { CUqTest } from "uqTest";
 import { VHome } from "./VHome";
@@ -26,6 +27,11 @@ export class CHome extends CUqBase {
 
 	load = async () => {
 
+	}
+
+	startController = (controller: new (cApp: CApp) => CUqBase) => {
+		let c = this.newC(controller);
+		c.start();
 	}
 
 	showUqTest = async () => {

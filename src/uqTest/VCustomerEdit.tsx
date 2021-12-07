@@ -4,12 +4,12 @@ import { CUqTest } from "uqTest";
 export class VCustomerEdit extends VPage<CUqTest> {
 
     content() {
-        let { BzHelloTonwa } = this.controller.uqs;
-        let { Customer } = BzHelloTonwa;
+        let { BzRequirements } = this.controller.uqs;
+        let { Customer } = BzRequirements;
         //let {ui} = Customer;
         /*
         return <Form fieldLabelSize={2} formData={param}
-        schema={schema}
+        schema={schema} 
         uiSchema={uiSchema}
         onButtonClick={this.onSubmit}  />;
         */

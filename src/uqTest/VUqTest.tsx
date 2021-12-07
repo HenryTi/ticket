@@ -1,5 +1,5 @@
 import { VPage } from "tonwa";
-import { Customer } from "uq-app/uqs/BzHelloTonwa";
+import { Customer } from "uq-app/uqs/BzRequirements";
 import { CUqTest } from "uqTest";
 
 export class VUqTest extends VPage<CUqTest> {
@@ -24,6 +24,10 @@ export class VUqTest extends VPage<CUqTest> {
             <div className="mb-3">
                 <button className="btn btn-primary"
                     onClick={() => this.controller.loadTvCustomer()}>客户Tv</button>
+            </div>
+            <div className="mb-3">
+                <button className="btn btn-primary"
+                    onClick={() => this.controller.changeCustomer()}>编辑客户</button>
             </div>
         </div>
     }

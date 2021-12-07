@@ -1,6 +1,0 @@
-ID Customer ver 0.3 (
-	id,
-	KEY no,
-	name CHAR(50),
-	vice CHAR(100),
-);

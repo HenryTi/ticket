@@ -1,9 +1,26 @@
-import { FA, VPage } from "tonwa";
+import { FA, LMR, VPage } from "tonwa";
 import { CHome } from "./CHome";
 import logo from '../logo.svg';
 import '../App.css';
+import { CCustomer } from "ids/customer";
+import { CApp, CUqBase } from "uq-app";
 
+interface Row {
+	caption: string;
+	controller: new (cApp: CApp) => CUqBase;
+}
 export class VHome extends VPage<CHome> {
+	private rows: Row[] = [
+		{
+			caption: '客户管理',
+			controller: CCustomer,
+		},
+		{
+			caption: '客户管理',
+			controller: CCustomer,
+		},
+	];
+
 	private items: string[] = [
 		'在服务器端创建 app',
 		'创建 uq 编程单元',
@@ -18,6 +35,18 @@ export class VHome extends VPage<CHome> {
 	header() { return '首页' }
 	content() {
 		return <div className="App">
+			<div className="mt-2">
+				{this.rows.map((v, index) => {
+					let { caption, controller } = v;
+					return <LMR key={index}
+						className="cursor-pointer py-2 px-3 bg-white border-bottom justify-content-start"
+						left={<div><FA className="me-3 text-primary" name="hand-o-right" fixWidth={true} />{caption}</div>}
+						right={<FA name="angle-right" />}
+						onClick={() => this.controller.startController(controller)}>
+					</LMR>;
+				})}
+			</div>
+
 			<header className="App-header">
 				<p>
 					<span className="text-success">tonwa</span> + <span className="text-primary">uq</span> = UI + DB

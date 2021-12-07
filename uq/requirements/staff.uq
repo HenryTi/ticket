@@ -1,0 +1,11 @@
+ID Staff ver 0.3 GLOBAL (
+	id,
+	KEY no,
+	name CHAR(30),
+);
+
+-- user 账号跟Staff绑定
+IX UserStaff (
+	ix user,
+	xi Staff Index,
+);
