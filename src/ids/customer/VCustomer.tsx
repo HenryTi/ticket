@@ -1,4 +1,4 @@
-import { FA, Form, VPage } from "tonwa";
+import { FA, VPage } from "tonwa";
 import { CCustomer } from "./CCustomer";
 
 export class VCustomer extends VPage<CCustomer> {

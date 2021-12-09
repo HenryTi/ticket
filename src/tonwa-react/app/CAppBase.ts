@@ -103,7 +103,7 @@ export abstract class CAppBase<U> extends ControllerWithWeb {
 		let uqsLoader = new UQsLoader(this.tonwa, this.appConfig);
 		let retErrors = await uqsLoader.build();
 		this.uqsMan = uqsLoader.uqsMan;
-		this._uqs = createUQsProxy(uqsLoader.uqsMan) as any; //  this.uqsMan.proxy;
+		this._uqs = createUQsProxy(this.web, uqsLoader.uqsMan) as any; //  this.uqsMan.proxy;
 		this.afterBuiltUQs(this._uqs);
 		return retErrors;
 	}

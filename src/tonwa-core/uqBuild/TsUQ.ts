@@ -69,6 +69,7 @@ export interface UqExt extends Uq {
 	Acts(param:ParamActs): Promise<any>;
 	SQL: Uq;
 	IDRender(id:number):${this.buildContext.element};
+	IDLocalRender(id:number):${this.buildContext.element};
 `;
 		function appendArr<T extends Entity>(arr: T[], type: string, tsBuild: (v: T) => string) {
 			if (arr.length === 0) return;
@@ -101,7 +102,7 @@ export function assign(uq: any, to:string, from:any): void {
 `;
 
 		tsImport += ` } from "tonwa-core";
-import { Render } from "tonwa-${this.buildContext.uiPlatform}";`;
+import { Render, IDXEntity } from "tonwa-${this.buildContext.uiPlatform}";`;
 
 		return tsImport + ts;
 	}
@@ -336,7 +337,7 @@ import { Render } from "tonwa-${this.buildContext.uiPlatform}";`;
 
 	private buildID = (id: ID): string => {
 		let { sName } = id;
-		let ts = `\t${entityName(sName)}: UqID<any>;`;
+		let ts = `\t${entityName(sName)}: UqID<any> & IDXEntity<any>;`;
 		return ts;
 	}
 

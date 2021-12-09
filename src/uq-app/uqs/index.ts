@@ -1,12 +1,12 @@
-//=== UqApp builder created on Mon Dec 06 2021 19:08:27 GMT-0500 (北美东部标准时间) ===//
-import * as BzRequirements from './BzRequirements';
+//=== UqApp builder created on Wed Dec 08 2021 19:04:56 GMT-0500 (北美东部标准时间) ===//
+import * as BzTicket from './BzTicket';
 
 export interface UQs {
-	BzRequirements: BzRequirements.UqExt;
+	BzTicket: BzTicket.UqExt;
 }
 
-export * as BzRequirements from './BzRequirements';
+export * as BzTicket from './BzTicket';
 
 export function setUI(uqs:UQs) {
-	BzRequirements.setUI(uqs.BzRequirements);
+	BzTicket.setUI(uqs.BzTicket);
 }

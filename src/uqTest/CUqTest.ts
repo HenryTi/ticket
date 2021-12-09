@@ -1,7 +1,6 @@
 import { CUqBase } from "uq-app";
-import { Customer } from "uq-app/uqs/BzRequirements";
+import { Customer } from "uq-app/uqs/BzTicket";
 import { VCustomerEdit } from "./VCustomerEdit";
-import { VCustomerNew } from "./VCustomerNew";
 import { VUqTest } from "./VUqTest";
 
 export class CUqTest extends CUqBase {
@@ -16,8 +15,8 @@ export class CUqTest extends CUqBase {
             vice: 'jk1 test'
         }
         // this.openVPage(VCustomerNew);
-        let { BzRequirements } = this.uqs;
-        let ret = await BzRequirements.Acts({
+        let { BzTicket } = this.uqs;
+        let ret = await BzTicket.Acts({
             customer: [customer],
         });
         alert('已保存 ' + JSON.stringify(ret));
@@ -28,22 +27,22 @@ export class CUqTest extends CUqBase {
     }
 
     listCustomer = async () => {
-        let { BzRequirements } = this.uqs;
-        let ret = await BzRequirements.ID({
-            IDX: BzRequirements.Customer,
+        let { BzTicket } = this.uqs;
+        let ret = await BzTicket.ID({
+            IDX: BzTicket.Customer,
             id: [1, 2, 3, 4],
         });
         alert('列表 ' + JSON.stringify(ret));
     }
 
     loadTvCustomer = async () => {
-        let { BzRequirements } = this.uqs;
-        let ret = await BzRequirements.IDTv([-1, -2, -3]);
+        let { BzTicket } = this.uqs;
+        let ret = await BzTicket.IDTv([-1, -2, -3]);
         alert('tv列表 ' + JSON.stringify(ret));
     }
 
     changeCustomer = async () => {
-        await this.uqs.BzRequirements.ChangeVice.submit({ id: 4, vice: 'test change vice' });
+        await this.uqs.BzTicket.ChangeVice.submit({ id: 4, vice: 'test change vice' });
         alert('完成');
     }
 }

@@ -1,14 +1,14 @@
-import { Form, VPage } from "tonwa";
+import { VPage } from "tonwa";
 import { List, LMR } from "tonwa-react";
-import { Customer } from "uq-app/uqs/BzRequirements";
+import { Customer } from "uq-app/uqs/BzTicket";
 import { CCustomer } from "./CCustomer";
 
 export class VCustomerList extends VPage<CCustomer> {
     header() { return '客户列表' }
 
     content() {
-        let { BzRequirements } = this.controller.uqs;
-        let { Customer } = BzRequirements;
+        //let { BzTicket } = this.controller.uqs;
+        //let { Customer } = BzTicket;
         return <div>
             <List items={this.controller.customerList}
                 item={{ render: this.renderItem, onClick: (item: Customer) => this.controller.showCustomer(item) }} />

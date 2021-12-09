@@ -1,13 +1,15 @@
 import { observer } from "mobx-react";
 import React from "react";
 import {
-	UqMan, Uq as UqCore
+	UqMan, Uq as UqCore, Web
 } from "tonwa-core";
 
 export class Uq {
+	private web: Web;
 	private $_uqMan: UqMan;
 	private $_uqSql: UqCore;
-	constructor(uqMan: UqMan) {
+	constructor(web: Web, uqMan: UqMan) {
+		this.web = web;
 		this.$_uqMan = uqMan;
 		this.$_uqSql = this.$_createUqSqlProxy();
 	}
@@ -26,6 +28,8 @@ export class Uq {
 				if (ret !== undefined) return ret;
 				let func = (this.$_uqMan as any)[key];
 				if (func !== undefined) return func;
+				func = (this as any)[key];
+				if (func !== undefined) return func;
 				let err = `entity ${this.$_uqMan.name}.${String(key)} not defined`;
 				console.error('UQ错误：' + err);
 				this.showReload('服务器正在更新');
@@ -42,7 +46,7 @@ export class Uq {
 				if (ret !== undefined) return ret;
 				let err = `entity ${this.$_uqMan.name}.${String(key)} not defined`;
 				console.error('UQ错误：' + err);
-				this.showReload('服务器正在更新');
+				this.$_uqMan.showReload('服务器正在更新');
 				return undefined;
 			}
 		});
@@ -50,22 +54,20 @@ export class Uq {
 	}
 
 	private showReload(msg: string) {
-		console.error('uq proxy error name', msg);
-		/*
-		let cache = this.localMap.child('$reload-tick');
+		//console.error('uq proxy error name', msg);
+		let cache = this.$_uqMan.localMap.child('$reload-tick');
 		let reloadTick = cache.get();
 		if (!reloadTick) reloadTick = 0;
 		console.error(msg);
-		this.localMap.removeAll();
+		this.$_uqMan.localMap.removeAll();
 		let tick = Date.now();
 		cache.set(tick);
-		if (tick - reloadTick  < 10*1000)  {
+		if (tick - reloadTick < 10 * 1000) {
 			this.web.showReloadPage(msg);
 		}
 		else {
 			this.web.reload();
 		}
-		*/
 	}
 
 	/*
@@ -75,6 +77,7 @@ export class Uq {
 	*/
 
 	protected IDRender = (id: number, render?: (value: any) => JSX.Element): JSX.Element => {
+		if (id === undefined || id === null) return null;
 		return React.createElement(observer(() => {
 			let ret = this.$_uqMan.idCache.getValue(id);
 			if (ret === undefined) {
@@ -106,6 +109,7 @@ export class Uq {
 	}
 
 	protected IDLocalRender = (id: number, render?: (value: any) => JSX.Element): JSX.Element => {
+		if (id === undefined || id === null) return null;
 		return this.IDRender(-id, render);
 	}
 }

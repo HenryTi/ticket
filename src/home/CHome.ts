@@ -1,4 +1,3 @@
-import { Controller } from "tonwa";
 import { CApp, CUqBase } from "uq-app";
 import { CUqTest } from "uqTest";
 import { VHome } from "./VHome";
@@ -26,7 +25,7 @@ export class CHome extends CUqBase {
 	tab = () => this.renderView(VHome);
 
 	load = async () => {
-
+		await this.cApp.cTicket.loadMyTicket();
 	}
 
 	startController = (controller: new (cApp: CApp) => CUqBase) => {

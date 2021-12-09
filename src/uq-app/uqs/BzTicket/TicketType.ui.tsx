@@ -2,7 +2,7 @@
 import { FieldItem, FieldItemNumber, FieldItemString, FieldItemId, FieldItemInt, UI, TFunc } from 'tonwa-react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Res, uqStringify, setRes } from "tonwa-core";
-import { Customer } from "./BzRequirements";
+import { TicketType } from "./BzTicket";
 
 /*--fields--*/
 const fields = {
@@ -12,13 +12,6 @@ const fields = {
 		"isKey": false,
 		"label": "Id"
 	} as FieldItemId,
-	no: {
-		"name": "no",
-		"type": "string",
-		"isKey": true,
-		"widget": "string",
-		"label": "No"
-	} as FieldItemString,
 	name: {
 		"name": "name",
 		"type": "string",
@@ -37,11 +30,11 @@ const fields = {
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.no, fields.name, fields.vice, 
+	fields.name, fields.vice, 
 ];
 
 export const ui: UI = {
-	label: "Customer",
+	label: "TicketType",
 	fieldArr,
 	fields,
 };
@@ -59,6 +52,6 @@ export const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {
 	return res[str as string] ?? str;
 }
 
-export function render(item: Customer):JSX.Element {
+export function render(item: TicketType):JSX.Element {
 	return <>{uqStringify(item)}</>;
 };

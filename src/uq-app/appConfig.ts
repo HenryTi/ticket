@@ -13,12 +13,12 @@ export const appConfig: AppConfig = {
 	uqs: [
 		{
 			dev: bz,
-			name: 'requirements',
-			alias: 'Requirements',
+			name: 'ticket',
+			alias: 'Ticket',
 			version: '0.1.0',
 		},
 	],
 	noUnit: true,
 	oem: undefined,
-	htmlTitle: '需求管理',
+	htmlTitle: '工单',
 };

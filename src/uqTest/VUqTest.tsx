@@ -1,5 +1,5 @@
 import { VPage } from "tonwa";
-import { Customer } from "uq-app/uqs/BzRequirements";
+import { Customer } from "uq-app/uqs/BzTicket";
 import { CUqTest } from "uqTest";
 
 export class VUqTest extends VPage<CUqTest> {
