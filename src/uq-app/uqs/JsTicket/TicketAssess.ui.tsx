@@ -2,7 +2,7 @@
 import { FieldItem, FieldItemNumber, FieldItemString, FieldItemId, FieldItemInt, UI, TFunc } from 'tonwa-react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Res, uqStringify, setRes } from "tonwa-core";
-import { Market } from "./BzTicket";
+import { TicketAssess } from "./JsTicket";
 
 /*--fields--*/
 const fields = {
@@ -12,13 +12,6 @@ const fields = {
 		"isKey": false,
 		"label": "Id"
 	} as FieldItemId,
-	no: {
-		"name": "no",
-		"type": "string",
-		"isKey": true,
-		"widget": "string",
-		"label": "No"
-	} as FieldItemString,
 	name: {
 		"name": "name",
 		"type": "string",
@@ -33,22 +26,29 @@ const fields = {
 		"widget": "string",
 		"label": "Vice"
 	} as FieldItemString,
-	icon: {
-		"name": "icon",
-		"type": "string",
+	min: {
+		"name": "min",
+		"type": "integer",
 		"isKey": false,
-		"widget": "string",
-		"label": "Icon"
-	} as FieldItemString,
+		"widget": "updown",
+		"label": "Min"
+	} as FieldItemInt,
+	max: {
+		"name": "max",
+		"type": "integer",
+		"isKey": false,
+		"widget": "updown",
+		"label": "Max"
+	} as FieldItemInt,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.no, fields.name, fields.vice, fields.icon, 
+	fields.name, fields.vice, fields.min, fields.max, 
 ];
 
 export const ui: UI = {
-	label: "Market",
+	label: "TicketAssess",
 	fieldArr,
 	fields,
 };
@@ -66,6 +66,6 @@ export const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {
 	return res[str as string] ?? str;
 }
 
-export function render(item: Market):JSX.Element {
+export function render(item: TicketAssess):JSX.Element {
 	return <>{uqStringify(item)}</>;
 };

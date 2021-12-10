@@ -1,5 +1,5 @@
 import { FA, List, VPage } from "tonwa";
-import { TicketType } from "uq-app/uqs/BzTicket";
+import { TicketType } from "uq-app/uqs/JsTicket";
 import { CTicketType } from "./CTicketType";
 
 export class VTicketTypeList extends VPage<CTicketType> {

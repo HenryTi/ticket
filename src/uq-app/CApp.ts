@@ -112,7 +112,7 @@ export class CApp extends CUqApp {
 			if (this.tick < gaps[this.gapIndex]) return;
 			this.tick = 0;
 			if (this.gapIndex < gaps.length - 1) ++this.gapIndex;
-			let ret = await this.uqs.BzTicket.$poked.query(undefined, undefined, false);
+			let ret = await this.uqs.JsTicket.$poked.query(undefined, undefined, false);
 			let v = ret.ret[0];
 			if (v === undefined) return;
 			if (!v.poke) return;

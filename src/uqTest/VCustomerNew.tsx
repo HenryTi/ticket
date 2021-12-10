@@ -4,8 +4,8 @@ import { CUqTest } from "uqTest";
 export class VCustomerNew extends VPage<CUqTest> {
 
     content() {
-        let { BzTicket } = this.controller.uqs;
-        let { Customer } = BzTicket;
+        let { JsTicket } = this.controller.uqs;
+        let { Customer } = JsTicket;
         //let {ui} = Customer;
         /*
         return <Form fieldLabelSize={2} formData={param}

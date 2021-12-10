@@ -2,9 +2,9 @@
 import { AppConfig } from "tonwa";
 import { DevConfig } from 'tonwa-core';
 
-const bz: DevConfig = {
-	name: 'bizdev',
-	alias: 'bz',
+const js: DevConfig = {
+	name: 'jksoft',
+	alias: 'js',
 }
 
 export const appConfig: AppConfig = {
@@ -12,7 +12,7 @@ export const appConfig: AppConfig = {
 	app: undefined,
 	uqs: [
 		{
-			dev: bz,
+			dev: js,
 			name: 'ticket',
 			alias: 'Ticket',
 			version: '0.1.0',

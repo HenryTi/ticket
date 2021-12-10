@@ -1,5 +1,5 @@
 import { CUqBase } from "uq-app";
-import { Customer } from "uq-app/uqs/BzTicket";
+import { Customer } from "uq-app/uqs/JsTicket";
 import { VCustomer } from "./VCustomer";
 import { VCustomerList } from "./VCustomerList";
 import { VCustomerNew } from "./VCustomerNew";
@@ -14,14 +14,14 @@ export class CCustomer extends CUqBase {
     }
 
     newCustomer = async () => {
-        let { BzTicket } = this.uqs;
-        this.newNo = await BzTicket.IDNO({ ID: BzTicket.Customer });
+        let { JsTicket } = this.uqs;
+        this.newNo = await JsTicket.IDNO({ ID: JsTicket.Customer });
         this.openVPage(VCustomerNew);
     }
 
     onNewSubmit = async (data: Customer) => {
-        let { BzTicket } = this.uqs;
-        let ret = await BzTicket.Acts(
+        let { JsTicket } = this.uqs;
+        let ret = await JsTicket.Acts(
             {
                 customer: [data],
 
@@ -31,9 +31,9 @@ export class CCustomer extends CUqBase {
     }
 
     list = async () => {
-        let { BzTicket } = this.uqs;
-        this.customerList = await BzTicket.QueryID<Customer>({
-            ID: BzTicket.Customer,
+        let { JsTicket } = this.uqs;
+        this.customerList = await JsTicket.QueryID<Customer>({
+            ID: JsTicket.Customer,
             page: {
                 start: 0,
                 size: 100,

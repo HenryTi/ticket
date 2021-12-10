@@ -1,5 +1,5 @@
 import { CUqBase } from "uq-app";
-import { ReturnMyTicketsRet, Staff } from "uq-app/uqs/BzTicket";
+import { ReturnMyTicketsRet, Staff } from "uq-app/uqs/JsTicket";
 import { VMyTickets } from "./VMyTickets";
 import { VTicketNew } from "./VTicketNew";
 
@@ -19,7 +19,7 @@ export class CTicket extends CUqBase {
     }
 
     async loadMyTicket() {
-        let ret = await this.uqs.BzTicket.MyTickets.query({});
+        let ret = await this.uqs.JsTicket.MyTickets.query({});
         this.runInAction(() => {
             this.data.myTickets = ret.ret;
         });
@@ -41,6 +41,6 @@ export class CTicket extends CUqBase {
     }
 
     saveTicket = async (discription: string) => {
-        await this.uqs.BzTicket.SaveTicket.submit({ to: this.data.selectedStaff.id, discription });
+        await this.uqs.JsTicket.SaveTicket.submit({ to: this.data.selectedStaff.id, discription });
     }
 }

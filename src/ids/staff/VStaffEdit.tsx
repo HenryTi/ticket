@@ -5,8 +5,8 @@ export class VStaffEdit extends VPage<CStaff> {
     header() { return '编辑职员' }
 
     content() {
-        //let { BzTicket } = this.controller.uqs;
-        //let { Customer } = BzTicket;
+        //let { JsTicket } = this.controller.uqs;
+        //let { Customer } = JsTicket;
         //let {ui} = Customer;
         /*
         return <Form fieldLabelSize={2} formData={param}

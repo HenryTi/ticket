@@ -1,14 +1,14 @@
 import { VPage } from "tonwa";
 import { List, LMR } from "tonwa";
-import { Staff } from "uq-app/uqs/BzTicket";
+import { Staff } from "uq-app/uqs/JsTicket";
 import { CStaff } from "./CStaff";
 
 export class VStaffList extends VPage<CStaff> {
     header() { return '职员列表' }
 
     content() {
-        //let { BzTicket } = this.controller.uqs;
-        //let { Staff } = BzTicket;
+        //let { JsTicket } = this.controller.uqs;
+        //let { Staff } = JsTicket;
         return <div>
             <List items={this.controller.data.staffList}
                 item={{ render: this.renderItem, onClick: (item: Staff) => this.controller.showStaff(item) }} />

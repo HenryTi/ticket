@@ -5,8 +5,8 @@ import { CStaff } from "./CStaff";
 export class VStaffNew extends VPage<CStaff> {
     header() { return '新建职员' }
     content() {
-        let { BzTicket } = this.controller.uqs;
-        let { Staff } = BzTicket;
+        let { JsTicket } = this.controller.uqs;
+        let { Staff } = JsTicket;
         let { schema, uiSchema } = createFormSchema(Staff, {
             no: {
                 widget: 'text',

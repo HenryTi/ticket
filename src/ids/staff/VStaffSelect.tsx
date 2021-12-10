@@ -1,5 +1,5 @@
 import { List, LMR, VPage } from "tonwa";
-import { Staff } from "uq-app/uqs/BzTicket";
+import { Staff } from "uq-app/uqs/JsTicket";
 import { CStaff } from "./CStaff";
 
 export class VStaffSelect extends VPage<CStaff> {

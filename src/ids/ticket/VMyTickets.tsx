@@ -1,5 +1,5 @@
 import { FA, List, LMR, View } from "tonwa";
-import { ReturnMyTicketsRet } from "uq-app/uqs/BzTicket";
+import { ReturnMyTicketsRet } from "uq-app/uqs/JsTicket";
 import { CTicket } from ".";
 
 export class VMyTickets extends View<CTicket> {
@@ -17,14 +17,14 @@ export class VMyTickets extends View<CTicket> {
     private renderMyTicket = (item: ReturnMyTicketsRet, index: number) => {
         // eslint-disable-next-line
         let { ticket, node, discription, state, from } = item;
-        let { BzTicket } = this.controller.uqs;
+        let { JsTicket } = this.controller.uqs;
         let left = <div className="d-block">
             <div className="small text-muted">
                 <FA name="user-o" className="me-2" />
-                {BzTicket.IDRender(from)}
+                {JsTicket.IDRender(from)}
             </div>
             <div>{discription}</div>
-            <div>{BzTicket.IDLocalRender(state)}</div>
+            <div>{JsTicket.IDLocalRender(state)}</div>
         </div>;
         return <LMR className="px-3 py-2" left={left}>
         </LMR>;

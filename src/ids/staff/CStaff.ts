@@ -1,5 +1,5 @@
 import { CUqBase } from "uq-app";
-import { Staff } from "uq-app/uqs/BzTicket";
+import { Staff } from "uq-app/uqs/JsTicket";
 import { VStaff } from "./VStaff";
 import { VStaffList } from "./VStaffList";
 import { VStaffNew } from "./VStaffNew";
@@ -24,8 +24,8 @@ export class CStaff extends CUqBase {
     }
 
     newStaff = async () => {
-        let { BzTicket } = this.uqs;
-        let newNo = await BzTicket.IDNO({ ID: BzTicket.Staff });
+        let { JsTicket } = this.uqs;
+        let newNo = await JsTicket.IDNO({ ID: JsTicket.Staff });
         this.runInAction(() => {
             this.data.newNo = newNo;
             this.openVPage(VStaffNew);
@@ -33,8 +33,8 @@ export class CStaff extends CUqBase {
     }
 
     onNewSubmit = async (data: Staff) => {
-        let { BzTicket } = this.uqs;
-        let ret = await BzTicket.Acts(
+        let { JsTicket } = this.uqs;
+        let ret = await JsTicket.Acts(
             {
                 staff: [data],
             }
@@ -43,9 +43,9 @@ export class CStaff extends CUqBase {
     }
 
     private async loadList() {
-        let { BzTicket } = this.uqs;
-        let staffList = await BzTicket.QueryID<Staff>({
-            ID: BzTicket.Staff,
+        let { JsTicket } = this.uqs;
+        let staffList = await JsTicket.QueryID<Staff>({
+            ID: JsTicket.Staff,
             page: {
                 start: 0,
                 size: 100,

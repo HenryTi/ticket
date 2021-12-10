@@ -1,14 +1,14 @@
 import { VPage } from "tonwa";
 import { List, LMR } from "tonwa";
-import { Customer } from "uq-app/uqs/BzTicket";
+import { Customer } from "uq-app/uqs/JsTicket";
 import { CCustomer } from "./CCustomer";
 
 export class VCustomerList extends VPage<CCustomer> {
     header() { return '客户列表' }
 
     content() {
-        //let { BzTicket } = this.controller.uqs;
-        //let { Customer } = BzTicket;
+        //let { JsTicket } = this.controller.uqs;
+        //let { Customer } = JsTicket;
         return <div>
             <List items={this.controller.customerList}
                 item={{ render: this.renderItem, onClick: (item: Customer) => this.controller.showCustomer(item) }} />

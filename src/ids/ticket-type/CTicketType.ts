@@ -19,9 +19,9 @@ export class CTicketType extends CUqBase {
     list: any[];
 
     protected async internalStart(param?: any, ...params: any[]): Promise<void> {
-        let { BzTicket } = this.uqs;
-        this.list = await BzTicket.QueryID({
-            ID: BzTicket.TicketType,
+        let { JsTicket } = this.uqs;
+        this.list = await JsTicket.QueryID({
+            ID: JsTicket.TicketType,
             page: {
                 start: 0,
                 size: 1000,
@@ -33,7 +33,7 @@ export class CTicketType extends CUqBase {
     saveTicketTypes = async () => {
         let retIds: number[] = [];
         for (let tt of this.ticketTypes) {
-            let ret = await this.uqs.BzTicket.SaveTicketType.submitReturns({
+            let ret = await this.uqs.JsTicket.SaveTicketType.submitReturns({
                 typeName: tt.name,
                 typeVice: undefined,
                 states: tt.arr.map(v => ({

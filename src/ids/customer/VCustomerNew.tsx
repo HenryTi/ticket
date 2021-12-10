@@ -5,8 +5,8 @@ import { CCustomer } from "./CCustomer";
 export class VCustomerNew extends VPage<CCustomer> {
     header() { return '新建客户' }
     content() {
-        let { BzTicket } = this.controller.uqs;
-        let { Customer } = BzTicket;
+        let { JsTicket } = this.controller.uqs;
+        let { Customer } = JsTicket;
         let { schema, uiSchema } = createFormSchema(Customer, {
             no: {
                 widget: 'text',
