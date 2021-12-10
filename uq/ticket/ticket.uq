@@ -90,6 +90,7 @@ ACT SaveTicket(
         SET a.discription=discription
             , a.creator=(SELECT u.xi FROM IxUserObject as u WHERE u.ix=$user);
     WITH IxStaffTicket IX=to XI=ticket;
+    POKE (SELECT a.ix FROM IxUserObject as a WHERE a.xi=to);
 };
 
 QUERY MyTickets()

@@ -3,7 +3,7 @@ import { Context, Form, UiButton, UiTextItem, VPage } from "tonwa";
 import { CStaff } from "./CStaff";
 
 export class VStaffNew extends VPage<CStaff> {
-    header() { return '新建客户' }
+    header() { return '新建职员' }
     content() {
         let { BzTicket } = this.controller.uqs;
         let { Staff } = BzTicket;

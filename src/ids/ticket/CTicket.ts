@@ -26,6 +26,7 @@ export class CTicket extends CUqBase {
     }
 
     newTicket = () => {
+        this.data.selectedStaff = undefined;
         this.openVPage(VTicketNew);
     }
 
