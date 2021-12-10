@@ -1,4 +1,4 @@
-import { FA, List, LMR, View } from "tonwa-react";
+import { FA, List, LMR, View } from "tonwa";
 import { ReturnMyTicketsRet } from "uq-app/uqs/BzTicket";
 import { CTicket } from ".";
 

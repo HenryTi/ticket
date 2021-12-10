@@ -1,6 +1,6 @@
 import { CStaff } from "ids/staff";
 import { ChangeEvent } from "react";
-import { FA, VPage } from "tonwa-react";
+import { FA, VPage } from "tonwa";
 import { CTicket } from ".";
 
 export class VTicketNew extends VPage<CTicket> {

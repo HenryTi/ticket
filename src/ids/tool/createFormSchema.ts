@@ -1,5 +1,5 @@
 import { UqID } from "tonwa-core";
-import { ButtonSchema, FieldItem, IDXEntity, UiItem, UiSchema } from "tonwa-react";
+import { ButtonSchema, FieldItem, IDXEntity, UiItem, UiSchema } from "tonwa";
 
 export function createFormSchema(ID: UqID<any> & IDXEntity<any>, uiItems: { [name: string]: UiItem }): {
     schema: (ButtonSchema | FieldItem)[];

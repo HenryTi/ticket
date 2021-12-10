@@ -1,4 +1,4 @@
-import { List, LMR, VPage } from "tonwa-react";
+import { List, LMR, VPage } from "tonwa";
 import { Staff } from "uq-app/uqs/BzTicket";
 import { CStaff } from "./CStaff";
 

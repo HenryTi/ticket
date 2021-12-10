@@ -1,4 +1,4 @@
-import { FA, List, VPage } from "tonwa-react";
+import { FA, List, VPage } from "tonwa";
 import { TicketType } from "uq-app/uqs/BzTicket";
 import { CTicketType } from "./CTicketType";
 

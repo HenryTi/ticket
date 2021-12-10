@@ -1,5 +1,5 @@
 import { VPage } from "tonwa";
-import { List, LMR } from "tonwa-react";
+import { List, LMR } from "tonwa";
 import { Customer } from "uq-app/uqs/BzTicket";
 import { CCustomer } from "./CCustomer";
 

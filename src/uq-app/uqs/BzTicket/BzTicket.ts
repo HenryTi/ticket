@@ -1,7 +1,7 @@
 //=== UqApp builder created on Wed Dec 08 2021 23:37:44 GMT-0500 (北美东部标准时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
-import { Render, IDXEntity } from "tonwa-react";
+import { Render, IDXEntity } from "tonwa";
 
 
 //===============================
@@ -265,13 +265,13 @@ export interface ParamActs {
 
 
 export interface UqExt extends Uq {
-	Acts(param:ParamActs): Promise<any>;
+	Acts(param: ParamActs): Promise<any>;
 	SQL: Uq;
-	IDRender(id:number):JSX.Element;
-	IDLocalRender(id:number):JSX.Element;
+	IDRender(id: number): JSX.Element;
+	IDLocalRender(id: number): JSX.Element;
 
-	$sheet: UqTuid<Tuid$sheet>&{tv:(id:number, render?:Render<any>)=>JSX.Element};
-	$user: UqTuid<Tuid$user>&{tv:(id:number, render?:Render<any>)=>JSX.Element};
+	$sheet: UqTuid<Tuid$sheet> & { tv: (id: number, render?: Render<any>) => JSX.Element };
+	$user: UqTuid<Tuid$user> & { tv: (id: number, render?: Render<any>) => JSX.Element };
 	$setMyTimezone: UqAction<Param$setMyTimezone, Result$setMyTimezone>;
 	ChangeVice: UqAction<ParamChangeVice, ResultChangeVice>;
 	SaveTicket: UqAction<ParamSaveTicket, ResultSaveTicket>;
@@ -299,7 +299,7 @@ export interface UqExt extends Uq {
 	Market: UqID<any> & IDXEntity<any>;
 }
 
-export function assign(uq: any, to:string, from:any): void {
+export function assign(uq: any, to: string, from: any): void {
 	let hasEntity = uq.hasEntity(to);
 	if (hasEntity === false) {
 		return;
