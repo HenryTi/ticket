@@ -5,6 +5,7 @@ import '../App.css';
 import { CCustomer } from "ids/customer";
 import { CProduct } from "ids/product";
 import { CStaff } from "ids/staff";
+import { CTicketType } from "ids/ticket-type";
 
 interface Row {
 	caption: string;
@@ -23,6 +24,10 @@ export class VHome extends VPage<CHome> {
 		{
 			caption: '职员管理',
 			onClick: () => this.controller.startController(CStaff),
+		},
+		{
+			caption: '工单类型',
+			onClick: () => this.controller.startController(CTicketType),
 		},
 		null,
 		{

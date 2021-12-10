@@ -15,7 +15,7 @@ const fields = {
 	name: {
 		"name": "name",
 		"type": "string",
-		"isKey": false,
+		"isKey": true,
 		"widget": "string",
 		"label": "Name"
 	} as FieldItemString,
@@ -26,11 +26,17 @@ const fields = {
 		"widget": "string",
 		"label": "Vice"
 	} as FieldItemString,
+	firstState: {
+		"name": "firstState",
+		"type": "id",
+		"isKey": false,
+		"label": "FirstState"
+	} as FieldItemId,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.name, fields.vice, 
+	fields.name, fields.vice, fields.firstState, 
 ];
 
 export const ui: UI = {

@@ -29,7 +29,7 @@ export class VTicketNew extends VPage<CTicket> {
     content() {
         return <div className="m-3">
             <div className="mb-3 row">
-                <label htmlFor="staticStaff" className="col-sm-2 col-form-label text-right">发送到:</label>
+                <label htmlFor="staticStaff" className="col-sm-2 col-form-label text-right">经办人</label>
                 <div className="col-sm-10">
                     {
                         this.react(() => {
@@ -40,7 +40,7 @@ export class VTicketNew extends VPage<CTicket> {
                                 value = staff.name;
                             }
                             else {
-                                placeholder = ' 点击选择职员';
+                                placeholder = ' 点击选择经办人';
                             }
                             return <input type="text" readOnly={true}
                                 placeholder={placeholder}

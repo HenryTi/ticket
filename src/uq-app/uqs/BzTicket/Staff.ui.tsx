@@ -30,7 +30,7 @@ const fields = {
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.no, fields.name,
+	fields.no, fields.name, 
 ];
 
 export const ui: UI = {

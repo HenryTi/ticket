@@ -47,8 +47,9 @@ IX IxTicketAssess (
 
 ID TicketType (
     id,
-    name CHAR(50),
+    KEY name CHAR(50),
     vice CHAR(200),
+    firstState ID TicketState,
 );
 
 ID TicketState (
@@ -56,9 +57,10 @@ ID TicketState (
     main ID TicketType,
     name CHAR(50),
     vice CHAR(200),
+    INDEX main_name(main, name) UNIQUE,
 );
 
-IX StateNext (
+IX IxStateNext (
     ix TicketState,
     xi TicketState,
 );
@@ -108,4 +110,37 @@ RETURNS ret (
             LEFT JOIN TicketNode as n ON n.id=a.node
             JOIN IxUserObject as b ON b.xi=a.ix
         WHERE b.ix=$user;
+};
+
+ACT SaveTicketType (
+    typeName CHAR(50),
+    typeVice TEXT,
+    ARR states (
+        stateName CHAR(50),
+        stateVice TEXT,
+    )
+)
+RETURNS ret (
+    id ID
+) {
+    VAR typeId ID = ID(TicketType new KEY name=typeName);
+    VAR pState ID = 0;
+    WITH TicketType ID=typeId SET vice=typeVice;
+    FOR states {
+        VAR stateId ID;
+        SET stateId=NULL;
+        SET stateId=a.id FROM TicketState as a WHERE a.main=typeId AND a.name=stateName;
+        IF stateId IS NULL {
+            SET stateId = ID(TicketState new);
+        }
+        WITH TicketState as a ID=stateId SET a.name=stateName, a.vice=stateVice, a.main=typeId;
+        IF pState = 0 {
+            WITH TicketType ID=typeId SET firstState=stateId;
+        }
+        ELSE {
+            WITH IxStateNext IX=pState XI=stateId;
+            SET pState=stateId;
+        }
+    }
+    INTO ret SELECT typeId as id;
 };

@@ -1,4 +1,4 @@
-//=== UqApp builder created on Wed Dec 08 2021 19:04:56 GMT-0500 (北美东部标准时间) ===//
+//=== UqApp builder created on Wed Dec 08 2021 23:37:44 GMT-0500 (北美东部标准时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
 import { Render, IDXEntity } from "tonwa-react";
@@ -61,6 +61,22 @@ export interface ParamSaveTicket {
 	discription: string;
 }
 export interface ResultSaveTicket {
+}
+
+export interface ParamSaveTicketType {
+	typeName: string;
+	typeVice: string;
+	states: {
+		stateName: string;
+		stateVice: string;
+	}[];
+
+}
+export interface ReturnSaveTicketTypeRet {
+	id: number;
+}
+export interface ResultSaveTicketType {
+	ret: ReturnSaveTicketTypeRet[];
 }
 
 export interface Param$poked {
@@ -195,6 +211,7 @@ export interface TicketType {
 	id?: number;
 	name: string;
 	vice: string;
+	firstState: number;
 }
 
 export interface TicketNode {
@@ -258,6 +275,7 @@ export interface UqExt extends Uq {
 	$setMyTimezone: UqAction<Param$setMyTimezone, Result$setMyTimezone>;
 	ChangeVice: UqAction<ParamChangeVice, ResultChangeVice>;
 	SaveTicket: UqAction<ParamSaveTicket, ResultSaveTicket>;
+	SaveTicketType: UqAction<ParamSaveTicketType, ResultSaveTicketType>;
 	$poked: UqQuery<Param$poked, Result$poked>;
 	$getMyTimezone: UqQuery<Param$getMyTimezone, Result$getMyTimezone>;
 	QueryTest: UqQuery<ParamQueryTest, ResultQueryTest>;
