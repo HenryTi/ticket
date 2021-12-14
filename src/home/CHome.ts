@@ -25,7 +25,8 @@ export class CHome extends CUqBase {
 	tab = () => this.renderView(VHome);
 
 	load = async () => {
-		await this.cApp.cTicket.loadMyTicket();
+		//await this.cApp.cTicket.loadMyTicket();
+		await this.cApp.cNote.loadFolders();
 	}
 
 	startController = (controller: new (cApp: CApp) => CUqBase) => {

@@ -1,4 +1,4 @@
-//=== UqApp builder created on Fri Dec 10 2021 14:54:39 GMT-0500 (北美东部标准时间) ===//
+//=== UqApp builder created on Mon Dec 13 2021 20:59:42 GMT-0500 (北美东部标准时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonwa-core";
 import { Render, IDXEntity } from "tonwa-react";
@@ -16,6 +16,21 @@ export enum SourceType {
 export enum TicketBox {
 	todo = 1,
 	toAssess = 2
+}
+
+export enum NoteX {
+	child = 1,
+	modify = 2,
+	chat = 3,
+	stop = 4,
+	done = 5
+}
+
+export enum SysFolder {
+	inbox = 1,
+	all = 2,
+	draft = 61,
+	trash = 62
 }
 
 export interface Tuid$sheet {
@@ -79,6 +94,20 @@ export interface ParamChangeVice {
 export interface ResultChangeVice {
 }
 
+export interface ParamSaveNote {
+	space: number;
+	note: number;
+	x: any;
+	content: string;
+	attach: string;
+}
+export interface ReturnSaveNoteRet {
+	id: number;
+}
+export interface ResultSaveNote {
+	ret: ReturnSaveNoteRet[];
+}
+
 export interface Param$poked {
 }
 export interface Return$pokedRet {
@@ -137,6 +166,58 @@ export interface ReturnQueryTestRet {
 }
 export interface ResultQueryTest {
 	ret: ReturnQueryTestRet[];
+}
+
+export interface ParamGetFolderNotes {
+	space: number;
+	folder: number;
+}
+export interface ReturnGetFolderNotesRet {
+	id: number;
+	content: string;
+	attach: string;
+	creator: number;
+}
+export interface ResultGetFolderNotes {
+	ret: ReturnGetFolderNotesRet[];
+}
+
+export interface ParamGetNote {
+	space: number;
+	id: number;
+}
+export interface ReturnGetNoteNote {
+	id: number;
+	content: string;
+	attach: string;
+	creator: number;
+}
+export interface ReturnGetNoteXNode {
+	id: number;
+	content: string;
+	attach: string;
+	creator: number;
+}
+export interface ResultGetNote {
+	note: ReturnGetNoteNote[];
+	xNode: ReturnGetNoteXNode[];
+}
+
+export interface ParamGetFolders {
+	space: number;
+}
+export interface ReturnGetFoldersSys {
+	id: number;
+	name: string;
+	type: any;
+}
+export interface ReturnGetFoldersFolder {
+	id: number;
+	name: string;
+}
+export interface ResultGetFolders {
+	sys: ReturnGetFoldersSys[];
+	folder: ReturnGetFoldersFolder[];
 }
 
 export interface Customer {
@@ -244,6 +325,29 @@ export interface TicketAssess {
 	max: number;
 }
 
+export interface Note {
+	id?: number;
+	content: string;
+	attach: string;
+	creator: number;
+}
+
+export interface Contact {
+	id?: number;
+	user: number;
+	alias: string;
+}
+
+export interface Folder {
+	id?: number;
+	name: string;
+}
+
+export interface Space {
+	id?: number;
+	name: string;
+}
+
 export interface ParamActs {
 	customer?: Customer[];
 	productPackage?: ProductPackage[];
@@ -261,6 +365,10 @@ export interface ParamActs {
 	sourceCustomerSheet?: SourceCustomerSheet[];
 	ticketState?: TicketState[];
 	ticketAssess?: TicketAssess[];
+	note?: Note[];
+	contact?: Contact[];
+	folder?: Folder[];
+	space?: Space[];
 }
 
 
@@ -276,11 +384,15 @@ export interface UqExt extends Uq {
 	SaveTicket: UqAction<ParamSaveTicket, ResultSaveTicket>;
 	SaveTicketType: UqAction<ParamSaveTicketType, ResultSaveTicketType>;
 	ChangeVice: UqAction<ParamChangeVice, ResultChangeVice>;
+	SaveNote: UqAction<ParamSaveNote, ResultSaveNote>;
 	$poked: UqQuery<Param$poked, Result$poked>;
 	$getMyTimezone: UqQuery<Param$getMyTimezone, Result$getMyTimezone>;
 	MyTickets: UqQuery<ParamMyTickets, ResultMyTickets>;
 	QueryTest1: UqQuery<ParamQueryTest1, ResultQueryTest1>;
 	QueryTest: UqQuery<ParamQueryTest, ResultQueryTest>;
+	GetFolderNotes: UqQuery<ParamGetFolderNotes, ResultGetFolderNotes>;
+	GetNote: UqQuery<ParamGetNote, ResultGetNote>;
+	GetFolders: UqQuery<ParamGetFolders, ResultGetFolders>;
 	Customer: UqID<any> & IDXEntity<any>;
 	ProductPackage: UqID<any> & IDXEntity<any>;
 	Market: UqID<any> & IDXEntity<any>;
@@ -297,6 +409,10 @@ export interface UqExt extends Uq {
 	SourceCustomerSheet: UqID<any> & IDXEntity<any>;
 	TicketState: UqID<any> & IDXEntity<any>;
 	TicketAssess: UqID<any> & IDXEntity<any>;
+	Note: UqID<any> & IDXEntity<any>;
+	Contact: UqID<any> & IDXEntity<any>;
+	Folder: UqID<any> & IDXEntity<any>;
+	Space: UqID<any> & IDXEntity<any>;
 }
 
 export function assign(uq: any, to:string, from:any): void {

@@ -10,6 +10,7 @@ import { CTicketType } from "ids/ticket-type";
 interface Row {
 	caption: string;
 	onClick: () => void;
+	icon?: 'plus';
 }
 export class VHome extends VPage<CHome> {
 	private rows: Row[] = [
@@ -32,8 +33,9 @@ export class VHome extends VPage<CHome> {
 		null,
 		{
 			caption: '新建工单',
-			onClick: this.controller.cApp.cTicket.newTicket,
-		}
+			onClick: this.controller.cApp.cNote.newNote,
+			icon: 'plus',
+		},
 	];
 
 	header() { return '首页' }
@@ -42,17 +44,15 @@ export class VHome extends VPage<CHome> {
 			<div className="mt-2">
 				{this.rows.map((v, index) => {
 					if (v === null) return <div key={index} className="my-3" />;
-					let { caption, onClick } = v;
+					let { caption, onClick, icon } = v;
 					return <LMR key={index}
 						className="cursor-pointer py-2 px-3 bg-white border-bottom justify-content-start"
-						left={<div><FA className="me-3 text-primary" name="hand-o-right" fixWidth={true} />{caption}</div>}
+						left={<div><FA className="me-3 text-primary" name={icon ?? 'hand-o-right'} fixWidth={true} />{caption}</div>}
 						right={<FA name="angle-right" />}
 						onClick={onClick}>
 					</LMR>;
 				})}
-				<div className="my-3">
-					{this.controller.cApp.cTicket.renderMyTickets()}
-				</div>
+				{this.controller.cApp.cNote.renderFolders()}
 			</div>
 		</div>;
 	}

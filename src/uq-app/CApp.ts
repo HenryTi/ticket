@@ -9,6 +9,7 @@ import { start } from "tonwa";
 import { appConfig } from "./appConfig";
 import { Tonwa } from "tonwa-core";
 import { CTicket } from "ids/ticket";
+import { CNote } from "ids";
 
 const gaps = [10, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10, 15, 15, 15, 30, 30, 60];
 
@@ -28,6 +29,7 @@ export class CApp extends CUqApp {
 	cHome: CHome;
 	cMe: CMe;
 	cTicket: CTicket;
+	cNote: CNote;
 
 	protected async internalStart(isUserLogin: boolean) {
 		makeObservable(this, {
@@ -41,6 +43,7 @@ export class CApp extends CUqApp {
 		this.cHome = this.newC(CHome);
 		this.cMe = this.newC(CMe);
 		this.cTicket = this.newC(CTicket);
+		this.cNote = this.newC(CNote);
 		this.cHome.load();
 		this.openVPage(VMain, undefined, this.dispose);
 		// 加上下面一句，可以实现主动页面刷新

@@ -1,0 +1,76 @@
+ID Space (
+    id,                     -- note id
+    name CHAR(50),
+);
+
+-- minimized id space，my default space
+IX IxMySpace (
+    ix User,
+    xi Space,
+);
+
+ID Contact (
+    id,
+    user ID,                    -- 也可以没有user，这样就不发信息给对方。可以自己管理对方的任务
+    alias CHAR(50),             -- 我赋予的联系人的名字
+);
+
+IX IxMyContact (
+    ix User,                    -- user
+    xi Contact,                 -- contact
+);
+
+IX IxSpaceContact (
+    ix Space,
+    xi Contact INDEX,           -- 收到邮件确定发送space
+);
+
+ID Folder (
+    id,
+    name CHAR(50),
+);
+
+IX FolderNest (
+    ix Folder,
+    xi Folder,                   -- nest folder
+);
+
+ENUM SysFolder (inbox=1, all=2,  draft=61, trash=62 );
+IX IxSysFolder (
+    ix Space,
+    xi ENUM SysFolder,
+    folder ID Folder,
+);
+
+IX IxSpaceFolder (
+    ix Space,
+    xi Folder,
+);
+
+IX IxFolderNote (
+    ix Folder,
+    xi Note,
+);
+
+QUERY GetFolders(
+    space ID,
+)
+RETURNS sys (
+    #Folder,
+    type ENUM SysFolder,
+) 
+RETURNS folder (
+    #Folder,
+) {
+    IF space IS NULL {
+        SET space=MIN(a.xi) FROM IxMySpace as a WHERE a.ix=$user;
+    }
+    INTO sys SELECT a.id, a.name, b.xi as type
+        FROM IxSysFolder as b JOIN Folder as a ON b.folder=a.id
+        WHERE b.ix=space
+        ORDER BY b.xi ASC;
+    INTO folder SELECT a.id, a.name
+        FROM IxSpaceFolder as b JOIN Folder as a ON b.xi=a.id
+        WHERE b.ix=space
+        ORDER BY a.id ASC;
+};

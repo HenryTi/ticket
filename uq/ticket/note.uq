@@ -1,0 +1,137 @@
+ID Note ver 0.1 MINUTEID (
+    id,
+    content CHAR(200),      -- 不允许回车
+    attach TEXT,            -- JSON的attach，可以包含任何东西。可以扩展
+    creator ID,
+);
+
+ENUM NoteX (child=1, modify=2, chat=3, stop=4, done=5);
+IX IxNoteX (
+    ix Note,
+    xi Note,
+    x ENUM NoteX,
+);
+
+ACT SaveNote(
+    space ID Space,
+    note ID Note,           -- 针对的note
+    x ENUM NoteX,           -- 关系
+    content CHAR(200),      -- 不允许回车
+    attach TEXT,            -- JSON的attach，可以包含任何东西。可以扩展
+)
+RETURNS ret (
+    id ID Note
+) {
+    IF space IS NOT NULL {
+        IF NOT EXISTS(SELECT a.xi FROM IxMySpace as a WHERE a.ix=$user) {
+            RETURN;
+        }
+    }
+    ELSE {
+        SET space=MIN(a.xi) FROM IxMySpace as a WHERE a.ix=$user;
+        IF space IS NULL {
+            SET space = ID(Space new);
+            WITH IxMySpace IX=$user XI=space;
+        }
+    }
+
+    VAR id ID, folder ID, allFolder ID;
+    
+    SET allFolder=a.folder FROM IxSysFolder as a WHERE a.ix=space AND a.xi=SysFolder.all;
+    IF allFolder IS NULL {
+        SET allFolder=ID(Folder new);
+        WITH IxSysFolder as a IX=space XI=SysFolder.all SET a.folder=allFolder;
+    }
+    IF note IS NULL {
+        SET folder=a.folder FROM IxSysFolder as a WHERE a.ix=space AND a.xi=SysFolder.inbox;
+        IF folder IS NULL {
+            SET folder=ID(Folder new);
+            WITH IxSysFolder as a IX=space XI=SysFolder.inbox SET a.folder=folder;
+        }
+        SET id = ID(Note new);
+        WITH Note as a ID=id SET a.content=content, a.attach=attach, a.creator=$user;
+        WITH IxFolderNote IX=folder XI=id;
+        WITH IxFolderNote IX=allFolder XI=id;
+    }
+    ELSE {
+        IF NOT EXISTS(SELECT a.xi FROM IxFolderNote as a WHERE a.ix=allFolder AND a.xi=note) {
+            -- 超越权限
+            RETURN;
+        }
+        IF x IS NULL {
+            -- 这里是修改
+            VAR orgContent CHAR(200), orgCreator ID;
+            SET orgContent=a.content, orgCreator=a.creator FROM Note as a WHERE a.id=note;
+            IF orgCreator=$user {
+                -- 只能修改自己的
+                SET id = ID(Note new);
+                WITH Note as a ID=id SET a.content=orgContent, a.attach=attach, a.creator=$user;
+                WITH Note as a ID=note SET a.content=content, a.attach=attach;
+                WITH IxNoteX as a IX=note XI=id SET a.x=NoteX.modify;
+            }
+        }
+        ELSE {
+            WITH IxNoteX as a IX=note XI=id SET a.x=x;
+        }
+    }
+
+    INTO ret SELECT id;
+};
+
+QUERY GetFolderNotes (
+    space ID Space,
+    folder ID Folder,
+) 
+RETURNS ret (
+    id ID,
+    content CHAR(200),
+    attach TEXT,
+    creator ID,
+) {
+    IF space IS NULL {
+        SET space = MIN(a.xi) FROM IxMySpace as a WHERE a.ix=$user;
+        IF space IS NULL {
+            RETURN;
+        }
+    }
+    ELSE {
+        IF NOT EXISTS(SELECT a.xi FROM IxMySpace as a WHERE a.ix=$user AND a.xi=space) {
+            RETURN;
+        }
+    }
+
+    INTO ret 
+        SELECT a.id, a.content, a.attach, a.creator
+        FROM IxFolderNote as b JOIN Note as a ON b.xi=a.id
+        WHERE b.ix=folder
+        ORDER BY a.id DESC;
+};
+
+QUERY GetNote ver 0.1 (
+    space ID Space,
+    id ID Note,
+)
+RETURNS note (
+    #Note
+)
+RETURNS xNode (
+    #Note
+) {
+    IF space IS NULL {
+        SET space=MIN(a.xi) FROM IxMySpace as a WHERE a.ix=$user;
+    }
+    IF NOT EXISTS (SELECT b.xi 
+        FROM IxSysFolder as a 
+            JOIN IxFolderNote as b ON a.folder=b.ix AND a.xi=SysFolder.all
+        WHERE b.xi=id)
+    {
+        RETURN;
+    }
+
+    INTO note SELECT a.id, a.content, a.attach, a.creator
+        FROM Note as a
+        WHERE a.id=id;
+    INTO xNode SELECT a.id, a.content, a.attach, a.creator
+        FROM IxNoteX as b JOIN Note as a ON b.xi=a.id
+        WHERE b.ix=id;
+};

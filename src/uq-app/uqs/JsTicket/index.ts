@@ -15,6 +15,10 @@ import * as Staff from './Staff.ui';
 import * as SourceCustomerSheet from './SourceCustomerSheet.ui';
 import * as TicketState from './TicketState.ui';
 import * as TicketAssess from './TicketAssess.ui';
+import * as Note from './Note.ui';
+import * as Contact from './Contact.ui';
+import * as Folder from './Folder.ui';
+import * as Space from './Space.ui';
 	
 export function setUI(uq: Uq) {
 	assign(uq, 'Customer', Customer);
@@ -33,5 +37,9 @@ export function setUI(uq: Uq) {
 	assign(uq, 'SourceCustomerSheet', SourceCustomerSheet);
 	assign(uq, 'TicketState', TicketState);
 	assign(uq, 'TicketAssess', TicketAssess);
+	assign(uq, 'Note', Note);
+	assign(uq, 'Contact', Contact);
+	assign(uq, 'Folder', Folder);
+	assign(uq, 'Space', Space);
 }
 export * from './JsTicket';
